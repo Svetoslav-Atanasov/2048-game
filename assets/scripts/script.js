@@ -42,9 +42,6 @@ function addTwos() {
 
     first.textContent = 2;
     second.textContent = 2;
-    console.log(first)
-    console.log(second)
-    console.log(game)
 
 }
 addTwos();
@@ -115,7 +112,6 @@ function right() {
 function moveRight(id) {
     if(!id.endsWith(game.length - 1)) {
         var arr = id.split("");
-        console.log(arr)
         var i = parseInt(arr[0]);
         var j = parseInt(arr[1]);
         for(var k = (j + 1); k < game.length; k++) {
@@ -124,15 +120,16 @@ function moveRight(id) {
                 var val = parseInt(document.getElementById(i + "" + (k - 1)).innerHTML);
                 var nVal = parseInt(document.getElementById(nId).innerHTML);
                 if(val === nVal) {
-                    if(excludeIds.indexOf(nId) == -1){
-                        excludeIds.push(nId);
+                    // if(excludeIds.indexOf(nId) == -1){
+                    //     excludeIds.push(nId);
+
                         document.getElementById(nId).innerHTML = (val + nVal);
                         
                         document.getElementById(i+ "" + (k - 1)).innerHTML = 0;
                        
                         isMoved = true;
                         
-                    }
+                    //}
                     break;
                 }
             }
@@ -151,8 +148,8 @@ function moveRight(id) {
 function up() {
     isMoved = false;
     excludeIds = [];
-    for(var j = 0;j < game.length;j++) {
-        for(var i = 0;i < game.length;i++) {
+    for(var j = 0; j < game.length; j++) {
+        for(var i = 0; i < game.length; i++) {
             var id = i + "" + j;
             if(document.getElementById(id).innerHTML != 0) {
                 moveUp(id);
@@ -175,12 +172,12 @@ function moveUp(id) {
                 var val = parseInt(document.getElementById((k + 1) + "" + j).innerHTML);
                 var nVal = parseInt(document.getElementById(nId).innerHTML);
                 if(val == nVal) {
-                    if(excludeIds.indexOf(nId) == -1){
-                        excludeIds.push(nId);
+                    // if(excludeIds.indexOf(nId) == -1){
+                    //     excludeIds.push(nId);
                         document.getElementById(nId).innerHTML = (val + nVal);
                         document.getElementById(( k + 1) + "" + j).innerHTML = 0;
                         isMoved = true;
-                    }
+                    //}
                     break;
                 }
             }
@@ -211,7 +208,7 @@ function down() {
     }
     return false;
 }
-function moveDown(id) {
+function moveDown(id) { 
     if(!id.startsWith( game.length - 1)) {
         var arr = id.split("");
         var i = parseInt(arr[0]);
@@ -223,12 +220,13 @@ function moveDown(id) {
                 var val = parseInt(document.getElementById((k - 1) + "" + j).innerHTML);
                 var nVal = parseInt(document.getElementById(nId).innerHTML);
                 if(val == nVal) {
-                    if(excludeIds.indexOf(nId) == -1){
-                        excludeIds.push(nId);
+                    // if(excludeIds.indexOf(nId) == -1){
+                    //     excludeIds.push(nId);
                         document.getElementById(nId).innerHTML = (val + nVal);
                         document.getElementById((k - 1) + "" + j).innerHTML = 0;
-                        isMoved = true;
-                    }
+                         isMoved = true;
+                        // console.log(excludeIds);
+                    //}
                     break;
                 }
             }
@@ -252,6 +250,7 @@ function update() {
                 ids.push(id);
             }
         }
+       
     }
     var id = ids[Math.floor(Math.random()*ids.length)];
     document.getElementById(id).innerHTML = "2";
@@ -266,6 +265,9 @@ function update() {
                 break;
             }
         }
+        if(allFilled) {
+			checkGameOver();
+		}
     }		
     //Update score
     // document.getElementById("score").innerHTML = score;
@@ -302,12 +304,12 @@ function moveLeft(id) {
                 var val = parseInt(document.getElementById(i + "" + (k + 1)).innerHTML);
                 var nVal = parseInt(document.getElementById(nId).innerHTML);
                 if(val === nVal) {
-                    if(excludeIds.indexOf(nId) === -1){
-                        excludeIds.push(nId);
+                    // if(excludeIds.indexOf(nId) === -1){
+                    //     excludeIds.push(nId);
                         document.getElementById(nId).innerHTML = (val + nVal);
                         document.getElementById(i + "" + (k + 1)).innerHTML = 0;
                         isMoved = true;
-                    }
+                    //}
                     break;
                 }
             }
@@ -320,6 +322,38 @@ function moveLeft(id) {
     }
     return false;
 }
+
+	function checkGameOver() {
+		var isOver = true;
+		for(var j = 0; j< game.length; j++) {
+			for(var i = min;i < (game.length - 1);i++) {
+				
+				var val = parseInt(document.getElementById(i + "" + j).innerHTML);
+				var nVal = parseInt(document.getElementById((i + 1) + "" + j).innerHTML);
+				if(val == nVal) {
+					isOver = false;
+					break;
+				}
+			}
+		}		
+		if(isOver == true) {
+			for(var i = 0; i < game.length; i++) {
+				for(var j = 0;j < (game.length - 1); j++) {
+					
+					var val = parseInt(document.getElementById(i+""+j).innerHTML);
+					var nVal = parseInt(document.getElementById(i+""+(j+1)).innerHTML);
+					if(val == nVal) {
+						isOver = false;
+						break;
+					}
+				}
+			}
+		}
+		if(isOver) {
+			alert("Game over!");
+		}
+		return false;
+	}
 
 // function showScreen() {
 //     for (let row = 0; row < igra.length; row++) {
