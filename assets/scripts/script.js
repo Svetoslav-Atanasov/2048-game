@@ -45,6 +45,8 @@ function addTwos() {
 
 }
 addTwos();
+changeColor();
+
 
 function updateNumbers() {
     for (let r = 0; r < game.length; r++) {
@@ -357,49 +359,63 @@ function changeColor() {
                 box.style.backgroundColor = '#eee4da';
             }
             if (box.textContent == '0') {
-                box.style.backgroundColor = '#eee4da';
+                box.style.backgroundColor = '#CDC1B4';
+                box.style.color = '#CDC1B4';
             }
             if (box.textContent == '2') {
                 box.style.backgroundColor = '#eee4da';
+                box.style.color = '#776e65';
             }
             if (box.textContent == '4') {
                 box.style.backgroundColor = '#E8E1C6';
+                box.style.color = '#776e65';
             }
 
             if (box.textContent == '8') {
                 box.style.backgroundColor = '#F1AE79';
+                box.style.color = '#F9F6F2';
             }
 
             if (box.textContent == '16') {
                 box.style.backgroundColor = '#F69465';
+                box.style.color = '#F9F6F2';
             }
 
             if (box.textContent == '32') {
                 box.style.backgroundColor = '#F47B61';
+                box.style.color = '#F9F6F2';
             }
             if (box.textContent == '64') {
                 box.style.backgroundColor = '#F75C34';
+                box.style.color = '#F9F6F2';
             }
             if (box.textContent == '128') {
                 box.style.backgroundColor = '#EDCF72';
+                box.style.color = '#F9F6F2';
             }
             if (box.textContent == '256') {
                 box.style.backgroundColor = '#EDCC61';
+                box.style.color = '#F9F6F2';
             }
             if (box.textContent == '512') {
                 box.style.backgroundColor = '#EDC850';
+                box.style.color = '#F9F6F2';
             }
             if (box.textContent == '1024') {
                 box.style.backgroundColor = '#EDC53F';
+                box.style.color = '#F9F6F2';
             }
             if (box.textContent == '2048') {
                 box.style.backgroundColor = '#EDC22E';
+                box.style.color = '#F9F6F2';
             }
             if (box.textContent == '4096') {
                 box.style.backgroundColor = '#3C3A32';
+                box.style.color = '#F9F6F2';
             }
             if (box.textContent == '8192') {
                 box.style.backgroundColor = '#3C3A32';
+                box.style.color = '#F9F6F2';
             }
         }
     }
