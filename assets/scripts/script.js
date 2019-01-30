@@ -25,15 +25,15 @@ function firstRandomCoordinates() {
 }
 firstRandomCoordinates();
 
-    var firstNumber = game[r1][c1];
-    console.log(firstNumber);
-    var secondNumber = game[r2][c2];
-    console.log(secondNumber);
+var firstNumber = game[r1][c1];
+console.log(firstNumber);
+var secondNumber = game[r2][c2];
+console.log(secondNumber);
 
-    var firstCoordinate = r1.toString() + c1.toString();
-    console.log(firstCoordinate);
-    var secondCoordinate = r2.toString() + c2.toString();
-    console.log(secondCoordinate);
+var firstCoordinate = r1.toString() + c1.toString();
+console.log(firstCoordinate);
+var secondCoordinate = r2.toString() + c2.toString();
+console.log(secondCoordinate);
 
 function addTwos() {
     //takes coordinate; with commas - id name
@@ -56,25 +56,8 @@ function updateNumbers() {
     }
 }
 
-
-// s tazi funkciq generiram novoto chislno, sled vseki hod
-// function throwNum() {
-//     q = Math.floor(Math.random() * 4);
-//     j = Math.floor(Math.random() * 4);
-//     for (let count = 1; count < 1000; count++) {
-//         if (igra[q][j] === 0) {
-//             igra[q][j] = 2;
-//             return;
-//         } else {
-//             q = Math.floor(Math.random() * 4);
-//             j = Math.floor(Math.random() * 4);
-//         }
-//     }
-// }
-
-
 document.onkeydown = function(e) {
-    e.preventDefault();//to prevent scroll of screen
+    e.preventDefault(); //to prevent scroll of screen
     switch (e.keyCode) {
         case 37:
             left();
@@ -94,15 +77,15 @@ document.onkeydown = function(e) {
 function right() {
     isMoved = false;
     excludeIds = [];
-    for(var i= 0;i < game.length; i++) {
-        for(var j = game.length-1;j >= 0; j--) {
-            var id = i+""+j;
-            if(document.getElementById(id).innerHTML != 0) {
+    for (var i = 0; i < game.length; i++) {
+        for (var j = game.length - 1; j >= 0; j--) {
+            var id = i + "" + j;
+            if (document.getElementById(id).innerHTML != 0) {
                 moveRight(id);
             }
         }
     }
-    if(isMoved === true) {
+    if (isMoved === true) {
         update()
     }
     return false;
@@ -110,84 +93,85 @@ function right() {
 
 
 function moveRight(id) {
-    if(!id.endsWith(game.length - 1)) {
+    if (!id.endsWith(game.length - 1)) {
         var arr = id.split("");
         var i = parseInt(arr[0]);
         var j = parseInt(arr[1]);
-        for(var k = (j + 1); k < game.length; k++) {
+        for (var k = (j + 1); k < game.length; k++) {
             var nId = i + "" + k;
-            if(document.getElementById(nId).innerHTML != 0) {
+            if (document.getElementById(nId).innerHTML != 0) {
                 var val = parseInt(document.getElementById(i + "" + (k - 1)).innerHTML);
                 var nVal = parseInt(document.getElementById(nId).innerHTML);
-                if(val === nVal) {
+                if (val === nVal) {
                     // if(excludeIds.indexOf(nId) == -1){
                     //     excludeIds.push(nId);
 
-                        document.getElementById(nId).innerHTML = (val + nVal);
-                        
-                        document.getElementById(i+ "" + (k - 1)).innerHTML = 0;
-                       
-                        isMoved = true;
-                        
+                    document.getElementById(nId).innerHTML = (val + nVal);
+
+                    document.getElementById(i + "" + (k - 1)).innerHTML = 0;
+
+                    isMoved = true;
+
                     //}
                     break;
                 }
-            }
-            else {
-                document.getElementById(nId).innerHTML = document.getElementById(i + ""+(k - 1)).innerHTML;
-                
-                document.getElementById(i + "" +(k - 1)).innerHTML = 0;
-               
+            } else {
+                document.getElementById(nId).innerHTML = document.getElementById(i + "" + (k - 1)).innerHTML;
+
+                document.getElementById(i + "" + (k - 1)).innerHTML = 0;
+
                 isMoved = true;
             }
         }
     }
+    changeColor();
     return false;
 }
 
 function up() {
     isMoved = false;
     excludeIds = [];
-    for(var j = 0; j < game.length; j++) {
-        for(var i = 0; i < game.length; i++) {
+    for (var j = 0; j < game.length; j++) {
+        for (var i = 0; i < game.length; i++) {
             var id = i + "" + j;
-            if(document.getElementById(id).innerHTML != 0) {
+            if (document.getElementById(id).innerHTML != 0) {
                 moveUp(id);
             }
         }
     }
-    if(isMoved === true) {
+    if (isMoved === true) {
         update();
     }
     return false;
 }
-function moveUp(id) {		
-    if(!id.startsWith(0)) {
+
+function moveUp(id) {
+    if (!id.startsWith(0)) {
         var arr = id.split("");
         var i = parseInt(arr[0]);
         var j = parseInt(arr[1]);
-        for(var k = (i - 1); k >= 0; k--) {
+        for (var k = (i - 1); k >= 0; k--) {
             var nId = k + "" + j;
-            if(document.getElementById(nId).innerHTML != 0) {
+            if (document.getElementById(nId).innerHTML != 0) {
                 var val = parseInt(document.getElementById((k + 1) + "" + j).innerHTML);
                 var nVal = parseInt(document.getElementById(nId).innerHTML);
-                if(val == nVal) {
+                if (val == nVal) {
                     // if(excludeIds.indexOf(nId) == -1){
                     //     excludeIds.push(nId);
-                        document.getElementById(nId).innerHTML = (val + nVal);
-                        document.getElementById(( k + 1) + "" + j).innerHTML = 0;
-                        isMoved = true;
+                    document.getElementById(nId).innerHTML = (val + nVal);
+                    document.getElementById((k + 1) + "" + j).innerHTML = 0;
+                    isMoved = true;
                     //}
                     break;
                 }
-            }
-            else {
-                document.getElementById(nId).innerHTML = document.getElementById(( k + 1 ) + "" + j).innerHTML;
+            } else {
+                document.getElementById(nId).innerHTML = document.getElementById((k + 1) + "" + j).innerHTML;
                 document.getElementById((k + 1) + "" + j).innerHTML = 0;
                 isMoved = true;
             }
         }
     }
+    changeColor();
     return false;
 }
 
@@ -195,80 +179,81 @@ function moveUp(id) {
 function down() {
     isMoved = false;
     excludeIds = [];
-    for(var i = 0; i < game.length; i++) {
-        for(var j = game.length -1; j >= 0; j--) {
-            var id = j + "" +i;
-            if(document.getElementById(id).innerHTML != 0) {
+    for (var i = 0; i < game.length; i++) {
+        for (var j = game.length - 1; j >= 0; j--) {
+            var id = j + "" + i;
+            if (document.getElementById(id).innerHTML != 0) {
                 moveDown(id);
             }
         }
     }
-    if(isMoved === true) {
+    if (isMoved === true) {
         update();
     }
     return false;
 }
-function moveDown(id) { 
-    if(!id.startsWith( game.length - 1)) {
+
+function moveDown(id) {
+    if (!id.startsWith(game.length - 1)) {
         var arr = id.split("");
         var i = parseInt(arr[0]);
         var j = parseInt(arr[1]);
 
-        for(var k = (i + 1); k < game.length; k++) {
+        for (var k = (i + 1); k < game.length; k++) {
             var nId = k + "" + j;
-            if(document.getElementById(nId).innerHTML != 0) {
+            if (document.getElementById(nId).innerHTML != 0) {
                 var val = parseInt(document.getElementById((k - 1) + "" + j).innerHTML);
                 var nVal = parseInt(document.getElementById(nId).innerHTML);
-                if(val == nVal) {
+                if (val == nVal) {
                     // if(excludeIds.indexOf(nId) == -1){
                     //     excludeIds.push(nId);
-                        document.getElementById(nId).innerHTML = (val + nVal);
-                        document.getElementById((k - 1) + "" + j).innerHTML = 0;
-                         isMoved = true;
-                        // console.log(excludeIds);
+                    document.getElementById(nId).innerHTML = (val + nVal);
+                    document.getElementById((k - 1) + "" + j).innerHTML = 0;
+                    isMoved = true;
+                    // console.log(excludeIds);
                     //}
                     break;
                 }
-            }
-            else {
-                document.getElementById(nId).innerHTML = document.getElementById(( k - 1 ) + "" + j).innerHTML;
-                document.getElementById(( k - 1) + "" + j).innerHTML = 0;
+            } else {
+                document.getElementById(nId).innerHTML = document.getElementById((k - 1) + "" + j).innerHTML;
+                document.getElementById((k - 1) + "" + j).innerHTML = 0;
                 isMoved = true;
             }
         }
     }
+    changeColor();
     return false;
 }
 
-function update() {		
+function update() {
     //Add new value
     var ids = [];
-    for(var i = 0; i < game.length; i++) {
-        for(var j = 0; j < game.length; j++) {
-            var id = i + "" +j;
-            if(document.getElementById(id).innerHTML == 0) {
+    for (var i = 0; i < game.length; i++) {
+        for (var j = 0; j < game.length; j++) {
+            var id = i + "" + j;
+            if (document.getElementById(id).innerHTML == 0) {
                 ids.push(id);
             }
         }
-       
+
     }
-    var id = ids[Math.floor(Math.random()*ids.length)];
+    var id = ids[Math.floor(Math.random() * ids.length)];
     document.getElementById(id).innerHTML = "2";
-    
+
     //Check if no move space available
     var allFilled = true;
-    for(var i = 0; i < game.lenght; i++) {
-        for(var j = 0; j < game.length; j++) {
+    for (var i = 0; i < game.lenght; i++) {
+        for (var j = 0; j < game.length; j++) {
             var id = i + "" + j;
-            if(document.getElementById(id).innerHTML == 0) {
+            if (document.getElementById(id).innerHTML == 0) {
                 allFilled = false;
                 break;
             }
         }
-        if(allFilled) {
-			checkGameOver();
-		}
-    }		
+        if (allFilled) {
+            checkGameOver();
+        }
+    }
     //Update score
     // document.getElementById("score").innerHTML = score;
     // if(allFilled) {
@@ -280,80 +265,81 @@ function update() {
 function left() {
     isMoved = false;
     excludeIds = [];
-    for(var i = 0;i < game.length; i++) {
-        for(var j=0; j < game.length; j++) {
+    for (var i = 0; i < game.length; i++) {
+        for (var j = 0; j < game.length; j++) {
             var id = i + "" + j;
-            if(document.getElementById(id).innerHTML != 0) {
+            if (document.getElementById(id).innerHTML != 0) {
                 moveLeft(id);
             }
         }
     }
-    if(isMoved === true) {
+    if (isMoved === true) {
         update();
     }
     return false;
 }
+
 function moveLeft(id) {
-    if(!id.endsWith(0)) {
+    if (!id.endsWith(0)) {
         var arr = id.split("");
         var i = parseInt(arr[0]);
         var j = parseInt(arr[1]);
-        for(var k = (j - 1); k >= 0; k--) {
+        for (var k = (j - 1); k >= 0; k--) {
             var nId = i + "" + k;
-            if(document.getElementById(nId).innerHTML != 0) {
+            if (document.getElementById(nId).innerHTML != 0) {
                 var val = parseInt(document.getElementById(i + "" + (k + 1)).innerHTML);
                 var nVal = parseInt(document.getElementById(nId).innerHTML);
-                if(val === nVal) {
+                if (val === nVal) {
                     // if(excludeIds.indexOf(nId) === -1){
                     //     excludeIds.push(nId);
-                        document.getElementById(nId).innerHTML = (val + nVal);
-                        document.getElementById(i + "" + (k + 1)).innerHTML = 0;
-                        isMoved = true;
+                    document.getElementById(nId).innerHTML = (val + nVal);
+                    document.getElementById(i + "" + (k + 1)).innerHTML = 0;
+                    isMoved = true;
                     //}
                     break;
                 }
-            }
-            else {
+            } else {
                 document.getElementById(nId).innerHTML = document.getElementById(i + "" + (k + 1)).innerHTML;
                 document.getElementById(i + "" + (k + 1)).innerHTML = 0;
                 isMoved = true;
             }
         }
     }
+    changeColor();
     return false;
 }
 
-	function checkGameOver() {
-		var isOver = true;
-		for(var j = 0; j< game.length; j++) {
-			for(var i = min;i < (game.length - 1);i++) {
-				
-				var val = parseInt(document.getElementById(i + "" + j).innerHTML);
-				var nVal = parseInt(document.getElementById((i + 1) + "" + j).innerHTML);
-				if(val == nVal) {
-					isOver = false;
-					break;
-				}
-			}
-		}		
-		if(isOver == true) {
-			for(var i = 0; i < game.length; i++) {
-				for(var j = 0;j < (game.length - 1); j++) {
-					
-					var val = parseInt(document.getElementById(i+""+j).innerHTML);
-					var nVal = parseInt(document.getElementById(i+""+(j+1)).innerHTML);
-					if(val == nVal) {
-						isOver = false;
-						break;
-					}
-				}
-			}
-		}
-		if(isOver) {
-			alert("Game over!");
-		}
-		return false;
-	}
+function checkGameOver() {
+    var isOver = true;
+    for (var j = 0; j < game.length; j++) {
+        for (var i = min; i < (game.length - 1); i++) {
+
+            var val = parseInt(document.getElementById(i + "" + j).innerHTML);
+            var nVal = parseInt(document.getElementById((i + 1) + "" + j).innerHTML);
+            if (val == nVal) {
+                isOver = false;
+                break;
+            }
+        }
+    }
+    if (isOver == true) {
+        for (var i = 0; i < game.length; i++) {
+            for (var j = 0; j < (game.length - 1); j++) {
+
+                var val = parseInt(document.getElementById(i + "" + j).innerHTML);
+                var nVal = parseInt(document.getElementById(i + "" + (j + 1)).innerHTML);
+                if (val == nVal) {
+                    isOver = false;
+                    break;
+                }
+            }
+        }
+    }
+    if (isOver) {
+        alert("Game over!");
+    }
+    return false;
+}
 
 // function showScreen() {
 //     for (let row = 0; row < igra.length; row++) {
@@ -361,62 +347,60 @@ function moveLeft(id) {
 //     }
 // }
 
-// function startGame() {
-//     random();
-//     igra[x][y] = 2;
-//     igra[z][w] = 2;
-//     showScreen();
-// }
+function changeColor() {
+    for (let r = 0; r < game.length; r++) {
+        for (let c = 0; c < game[r].length; c++) {
+            var coordinate = r.toString() + c.toString();
+            var box = document.getElementById(coordinate);
 
+            if (box.textContent == '') {
+                box.style.backgroundColor = '#eee4da';
+            }
+            if (box.textContent == '0') {
+                box.style.backgroundColor = '#eee4da';
+            }
+            if (box.textContent == '2') {
+                box.style.backgroundColor = '#eee4da';
+            }
+            if (box.textContent == '4') {
+                box.style.backgroundColor = '#E8E1C6';
+            }
 
-// function left() {
-//     // ostavqm v masivite samo chisla != 0
-//     igra[0] = igra[0].filter(num => num != 0);
-//     igra[1] = igra[1].filter(num => num != 0);
-//     igra[2] = igra[2].filter(num => num != 0);
-//     igra[3] = igra[3].filter(num => num != 0);
+            if (box.textContent == '8') {
+                box.style.backgroundColor = '#F1AE79';
+            }
 
-//     // subiram sysednite ednakvi chisla
-//     for (let row = 0; row < igra.length; row++) {
-//         for (let col = 0; col < igra[row].length; col++) {
-//             if (igra[row][col - 1] === igra[row][col]) {
-//                 igra[row][col - 1] *= 2;
-//                 igra[row][col] = 0;
-//             }
-//         }
-//     }
-//     //zapulvam praznite mesta s 0-li
-//     for (let row = 0; row < igra.length; row++) {
-//         while (igra[row].length < igra.length) {
-//             igra[row].push(0);
-//         }
-//     }
-//     throwNum();
-//     console.log();
-//     showScreen();
-// }
+            if (box.textContent == '16') {
+                box.style.backgroundColor = '#F69465';
+            }
 
-// function right() {
-//     igra[0] = igra[0].filter(num => num != 0);
-//     igra[1] = igra[1].filter(num => num != 0);
-//     igra[2] = igra[2].filter(num => num != 0);
-//     igra[3] = igra[3].filter(num => num != 0);
-
-//     for (let row = 0; row < igra.length; row++) {
-//         for (let col = 0; col < igra[row].length; col++) {
-//             if (igra[row][col + 1] === igra[row][col]) {
-//                 igra[row][col + 1] *= 2;
-//                 igra[row][col] = 0;
-//             }
-//         }
-//     }
-//     for (let row = 0; row < igra.length; row++) {
-//         while (igra[row].length < igra.length) {
-//             igra[row].unshift(0);
-//         }
-//     }
-//     throwNum();
-//     console.log();
-//     showScreen();
-// }
-
+            if (box.textContent == '32') {
+                box.style.backgroundColor = '#F47B61';
+            }
+            if (box.textContent == '64') {
+                box.style.backgroundColor = '#F75C34';
+            }
+            if (box.textContent == '128') {
+                box.style.backgroundColor = '#EDCF72';
+            }
+            if (box.textContent == '256') {
+                box.style.backgroundColor = '#EDCC61';
+            }
+            if (box.textContent == '512') {
+                box.style.backgroundColor = '#EDC850';
+            }
+            if (box.textContent == '1024') {
+                box.style.backgroundColor = '#EDC53F';
+            }
+            if (box.textContent == '2048') {
+                box.style.backgroundColor = '#EDC22E';
+            }
+            if (box.textContent == '4096') {
+                box.style.backgroundColor = '#3C3A32';
+            }
+            if (box.textContent == '8192') {
+                box.style.backgroundColor = '#3C3A32';
+            }
+        }
+    }
+}
